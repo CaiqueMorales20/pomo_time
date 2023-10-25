@@ -1,3 +1,5 @@
+// Imports
 import { createContext } from "react";
 
-export const AppContext = createContext<null>(null)
+// Creating Context
+export const AppContext = createContext<ContextType | null>(null)

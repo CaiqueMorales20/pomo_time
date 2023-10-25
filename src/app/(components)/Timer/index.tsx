@@ -8,7 +8,6 @@ import { useEffect, useState } from "react";
 export default function Timer() {
   // Variables
   const [running, setRunning] = useState(false)
-  const [hours, setHours] = useState(0)
   const [minutes, setMinutes] = useState(25)
   const [seconds, setSeconds] = useState(0)
 
@@ -40,9 +39,11 @@ export default function Timer() {
 
   // Rendering
   return (
-    <section className="mx-auto flex flex-col gap-[19px] items-center justify-center mt-[45px]">
-      <h2 className="text-[100px] font-bold text-center text-[#D7E0FF]">{minutes.toString().length === 1 ? `0${minutes}` : minutes}:{seconds.toString().length === 1 ? `0${seconds}` : seconds}</h2>
-      <button className="tracking-[15px] text-[#D7E0FF] text-center hover:text-[#F87070] uppercase duration-300" onClick={() => setRunning(!running)}>{running ? 'stop' : 'start'}</button>
+    <section className="mt-[45px] bg-bg-timer timer-shadow rounded-[50%] w-[500px] h-[500px] flex items-center justify-center">
+      <div className="mx-auto flex flex-col gap-[19px] items-center justify-center bg-[#181B34] rounded-[50%] h-[85%] w-[85%]">
+        <h2 className="text-[100px] font-bold text-center text-[#D7E0FF]">{minutes.toString().length === 1 ? `0${minutes}` : minutes}:{seconds.toString().length === 1 ? `0${seconds}` : seconds}</h2>
+        <button className="tracking-[15px] text-[#D7E0FF] text-center hover:text-[#F87070] uppercase duration-300" onClick={() => setRunning(!running)}>{running ? 'stop' : 'start'}</button>
+      </div>
     </section> 
   );
 }
