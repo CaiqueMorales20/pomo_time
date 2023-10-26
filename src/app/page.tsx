@@ -1,6 +1,7 @@
 // Components
 import Switch from './(components)/Switch'
 import Timer from './(components)/Timer'
+import { AppContext } from './context'
 
 // Funcional Component
 export default function Home() {

@@ -1,10 +1,24 @@
 // Types
-interface ContextType {
-  status: 'timer' | 'short break' | 'long break'
-  color: 'pink' | 'blue' | 'lilac' 
-  fontFamily: 'kumbh' | 'Roboto' | 'Space'
-  running: true | false
+type StatusType = 'pomodoro' | 'short break' | 'long break' 
+type ColorType = 'pink' | 'blue' | 'lilac'
+type FontType = 'kumbh' | 'Roboto' | 'Space'
+type RunningType = true | false
+
+type ContextType = {
+  status: StatusType
+  setStatus: (prev: StatusType) => void
+  color: ColorType 
+  setColor: (prev: ColorType) => void
+  fontFamily: FontType
+  setFontFamily: (prev: FontType) => void
+  running: RunningType
+  setRunning: (prev: RunningType) => void
   pomodoroTime: number
+  setPomodoroTime: (prev: number) => void
   shortBreakTime: number
+  setShortBreakTime: (prev: number) => void
   longBreakTime: number
+  setLongBreakTime: (prev: number) => void
+  breakSequence: number
+  setBreakSequence: (prev: any) => void
 }
