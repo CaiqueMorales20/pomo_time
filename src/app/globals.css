@@ -6,6 +6,16 @@ body{
   background-color: #1E213F;
 }
 
+body.modal-open{
+  height: 100vh;
+  overflow: hidden;
+}
+
+body.modal-open::after{
+  z-index: 10;
+  opacity: 1;
+}
+
 .timer-shadow{
   box-shadow: 50px 50px 100px 0px #121530, -50px -50px 100px 0px #272C5A;
 }

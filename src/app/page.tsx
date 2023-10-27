@@ -1,7 +1,7 @@
 // Components
+import Settings from './(components)/Settings'
 import Switch from './(components)/Switch'
 import Timer from './(components)/Timer'
-import { AppContext } from './context'
 
 // Funcional Component
 export default function Home() {
@@ -10,6 +10,7 @@ export default function Home() {
       <h1 className="text-center text-[32px] font-bold text-[#D7E0FF]">Pomo Time</h1>
       <Switch />
       <Timer />
+      <Settings />
     </main>
   )
 }

@@ -11,6 +11,9 @@ const config: Config = {
       backgroundImage: {
         'bg-timer': ' linear-gradient(315deg, #2E325A 0%, #0E112A 100%)',
       },
+      colors: {
+        'dark': '#161932'
+      }
     },
   },
   plugins: [],
