@@ -19,3 +19,21 @@ body.modal-open::after{
 .timer-shadow{
   box-shadow: 50px 50px 100px 0px #121530, -50px -50px 100px 0px #272C5A;
 }
+
+.input-number::-webkit-inner-spin-button,
+.input-number::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+
+.input-number::-webkit-inner-spin-button {
+  background-image: url('/arrows.svg');
+  background-size: 12px;
+  background-repeat: no-repeat;
+  background-position: top center;
+  width: 12px; 
+  height: 17px;
+  cursor: pointer;
+}
