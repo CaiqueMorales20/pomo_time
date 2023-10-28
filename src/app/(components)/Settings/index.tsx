@@ -15,10 +15,10 @@ import { AppContext } from "@/app/context";
 export default function Settings() {
   // Variables
   const {setPomodoroTime, setShortBreakTime, setLongBreakTime} = useContext(AppContext) as ContextType
-  const [modalOpened, setModalOpened] = useState(false)
-  const [localPomodoroTime, setLocalPomodoroTime] = useState<number>()
-  const [localShortBreakTime, setLocalShortBreakTime] = useState<number>();
-  const [localLongBreakTime, setLocalLongBreakTime] = useState<number>();
+  const [modalOpened, setModalOpened] = useState<boolean>(false)
+  const [localPomodoroTime, setLocalPomodoroTime] = useState<number>(0)
+  const [localShortBreakTime, setLocalShortBreakTime] = useState<number>(0);
+  const [localLongBreakTime, setLocalLongBreakTime] = useState<number>(0);
   const modalRef = useRef(null)
 
   // Functions
@@ -56,7 +56,7 @@ export default function Settings() {
   return (
     <div>
       {/* Button */}
-      <Image className="cursor-pointer" src="/settings.svg" width={27} height={28} alt="Abrir configurações" onClick={handleModal} />
+      <Image className="cursor-pointer" src="/settings.svg" width={28} height={28} alt="Abrir configurações" onClick={handleModal} />
       {/* Modal */}
       <div className={`fixed flex items-center justify-center bg-[#0a0c1c80] w-screen h-screen inset-0 duration-300 ${modalOpened ? 'z-10 opacity-100' : 'z-[-1] opacity-0'}`}>
         <div ref={modalRef} className="bg-white w-[740px] rounded-[25px] pt-[34px] pb-[59px] relative">
@@ -75,15 +75,15 @@ export default function Settings() {
               <div className="grid grid-cols-3 gap-[20px]">
                 <div className="flex flex-col gap-[8px]">
                     <label className="text-[12px] text-dark opacity-40 font-bold">pomodoro</label>
-                    <input value={localPomodoroTime} onChange={(e) => handleTime(e, setLocalPomodoroTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
+                    <input value={localPomodoroTime === 0 ? '' : localPomodoroTime} onChange={(e) => handleTime(e, setLocalPomodoroTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
                 </div>
                 <div className="flex flex-col gap-[8px]">
                     <label className="text-[12px] text-dark opacity-40 font-bold">short break</label>
-                    <input value={localShortBreakTime} onChange={(e) => handleTime(e, setLocalShortBreakTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
+                    <input value={localShortBreakTime === 0 ? '' : localShortBreakTime} onChange={(e) => handleTime(e, setLocalShortBreakTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
                 </div>
                 <div className="flex flex-col gap-[8px]">
                     <label className="text-[12px] text-dark opacity-40 font-bold">long break</label>
-                    <input value={localLongBreakTime} onChange={(e) => handleTime(e, setLocalLongBreakTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
+                    <input value={localLongBreakTime === 0 ? '' : localLongBreakTime} onChange={(e) => handleTime(e, setLocalLongBreakTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
                 </div>
               </div>
               {/* Wrapper */}

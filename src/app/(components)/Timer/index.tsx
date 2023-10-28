@@ -4,6 +4,9 @@
 // Imports
 import { useContext, useEffect, useState } from "react";
 
+// Imported Components
+import Circle from "react-circle";
+
 // Context
 import { AppContext } from "@/app/context";
 
@@ -15,13 +18,15 @@ export default function Timer() {
   const [running, setRunning] = useState(false)
   const [minutes, setMinutes] = useState(currentTime)
   const [seconds, setSeconds] = useState(0)
+  const totalSeconds = currentTime * 60;
+  const remainingSeconds = minutes * 60 + seconds;
+  const progress = ((totalSeconds - remainingSeconds) / totalSeconds) * 100;
 
   // Functions
   useEffect(() => {
     setMinutes(currentTime)
   }, [currentTime]);
 
-  // Functions
   function decrease() {
     // Finished Timer
     if (minutes === 0 && seconds === 0) {
@@ -67,10 +72,21 @@ export default function Timer() {
 
   // Rendering
   return (
-    <section className="mt-[45px] mb-[63px] bg-bg-timer timer-shadow rounded-[50%] w-[500px] h-[500px] flex items-center justify-center">
-      <div className="mx-auto flex flex-col gap-[19px] items-center justify-center bg-[#181B34] rounded-[50%] h-[85%] w-[85%]">
+    <section className="mt-[45px] mb-[63px] bg-bg-timer timer-shadow rounded-[50%] w-[500px] h-[500px] flex items-center justify-center relative">
+      <div className="mx-auto flex flex-col gap-[19px] items-center justify-center rounded-[50%] h-[80%] w-[80%] absolute z-20">
         <h2 className="text-[100px] font-bold text-center text-[#D7E0FF]">{minutes.toString().length === 1 ? `0${minutes}` : minutes}:{seconds.toString().length === 1 ? `0${seconds}` : seconds}</h2>
         <button className="tracking-[15px] text-[#D7E0FF] text-center hover:text-[#F87070] uppercase duration-300" onClick={() => setRunning(!running)}>{running ? 'pause' : 'start'}</button>
+      </div>
+      <div className="w-[90%] h-[90%] absolute  flex items-center bg-[#181B34] rounded-[50%] justify-center">
+        <Circle
+          progress={progress}
+          size={'100%'}
+          lineWidth={running ? '11' : '0'}
+          showPercentage={false}
+          progressColor="#F87070"
+          bgColor="#181B34"
+          roundedStroke
+        />
       </div>
     </section> 
   );
