@@ -10,15 +10,18 @@ import Image from "next/image";
 
 // Context
 import { AppContext } from "@/app/context";
+import { kumbh_sans, roboto_slab, space_mono } from "@/app/page";
 
 // Functional Component
 export default function Settings() {
   // Variables
-  const {setPomodoroTime, setShortBreakTime, setLongBreakTime} = useContext(AppContext) as ContextType
+  const {fontFamily, setFontFamily, color, setColor, pomodoroTime, setPomodoroTime, shortBreakTime ,setShortBreakTime, longBreakTime, setLongBreakTime} = useContext(AppContext) as ContextType
   const [modalOpened, setModalOpened] = useState<boolean>(false)
-  const [localPomodoroTime, setLocalPomodoroTime] = useState<number>(0)
-  const [localShortBreakTime, setLocalShortBreakTime] = useState<number>(0);
-  const [localLongBreakTime, setLocalLongBreakTime] = useState<number>(0);
+  const [localPomodoroTime, setLocalPomodoroTime] = useState<number>(pomodoroTime)
+  const [localShortBreakTime, setLocalShortBreakTime] = useState<number>(shortBreakTime);
+  const [localLongBreakTime, setLocalLongBreakTime] = useState<number>(longBreakTime);
+  const [localColor, setLocalColor] = useState<ColorType>(color);
+  const [localFontFamily, setLocalFontFamily] = useState<FontType>(fontFamily);
   const modalRef = useRef(null)
 
   // Functions
@@ -37,16 +40,18 @@ export default function Settings() {
     const parsedValue: number = parseInt(newValue.replace(/\D/g, ''))
     if (parsedValue > 60) return setTime(60)
     setTime(parsedValue)
+    if (Number.isNaN(parsedValue)){
+      setTime(0)
+    }
   }
 
   function applyFilter() {
+    setModalOpened(false)
     setPomodoroTime(localPomodoroTime)
     setShortBreakTime(localShortBreakTime)
     setLongBreakTime(localLongBreakTime)
-    setLocalPomodoroTime(0)
-    setLocalShortBreakTime(0)
-    setLocalLongBreakTime(0)
-    setModalOpened(false)
+    setColor(localColor)
+    setFontFamily(localFontFamily)
   }
 
   useOnClickOutside(modalRef, () => setModalOpened(false));
@@ -58,7 +63,7 @@ export default function Settings() {
       {/* Button */}
       <Image className="cursor-pointer" src="/settings.svg" width={28} height={28} alt="Abrir configurações" onClick={handleModal} />
       {/* Modal */}
-      <div className={`fixed flex items-center justify-center bg-[#0a0c1c80] w-screen h-screen inset-0 duration-300 ${modalOpened ? 'z-10 opacity-100' : 'z-[-1] opacity-0'}`}>
+      <div className={`fixed flex items-center justify-center bg-[#0a0c1c80] w-screen h-screen inset-0 duration-300 ${modalOpened ? 'z-20 opacity-100' : 'z-[-1] opacity-0'}`}>
         <div ref={modalRef} className="bg-white w-[740px] rounded-[25px] pt-[34px] pb-[59px] relative">
           {/* Title */}
           <header className="flex  px-[40px] items-center justify-between">
@@ -92,13 +97,13 @@ export default function Settings() {
               <div className="flex justify-between items-center">
                 <h3 className="text-dark text-[13px] font-bold tracking-[5px] uppercase">Font</h3>
                 <div className="flex gap-[16px]">
-                  <button className="py-[13px] px-[10px] bg-dark w-[40px] h-[40px] flex items-center text-white text-[15px] font-bold rounded-[50%]">
+                  <button onClick={() => setLocalFontFamily('Kumbh')} className={`py-[13px] px-[10px] w-[40px] h-[40px] flex items-center text-[15px] font-bold duration-300 rounded-[50%] ${kumbh_sans.className} ${localFontFamily === 'Kumbh' ? 'bg-dark text-white' : 'bg-[#EFF1FA] text-dark'}`}>
                     Aa
                   </button>
-                  <button className="py-[13px] px-[10px] bg-dark w-[40px] h-[40px] flex items-center text-white text-[15px] font-bold rounded-[50%]">
+                  <button onClick={() => setLocalFontFamily('Roboto')} className={`py-[13px] px-[10px] w-[40px] h-[40px] flex items-center text-[15px] font-bold duration-300 rounded-[50%] ${roboto_slab.className} ${localFontFamily === 'Roboto' ? 'bg-dark text-white' : 'bg-[#EFF1FA] text-dark'}`}>
                     Aa
                   </button>
-                  <button className="py-[13px] px-[10px] bg-dark w-[40px] h-[40px] flex items-center text-white text-[15px] font-bold rounded-[50%]">
+                  <button onClick={() => setLocalFontFamily('Space')} className={`py-[13px] px-[10px] w-[40px] h-[40px] flex items-center text-[15px] font-bold duration-300 rounded-[50%] ${space_mono.className} ${localFontFamily === 'Space' ? 'bg-dark text-white' : 'bg-[#EFF1FA] text-dark'}`}>
                     Aa
                   </button>
                 </div>
@@ -109,15 +114,21 @@ export default function Settings() {
               <div className="flex justify-between items-center">
                 <h3 className="text-dark text-[13px] font-bold tracking-[5px] uppercase">Color</h3>
                 <div className="flex gap-[16px]">
-                  <button className="py-[13px] px-[10px] bg-[#F87070] w-[40px] h-[40px] flex items-center text-white text-[15px] font-bold rounded-[50%]"></button>
-                  <button className="py-[13px] px-[10px] bg-[#70F3F8] w-[40px] h-[40px] flex items-center text-white text-[15px] font-bold rounded-[50%]"></button>
-                  <button className="py-[13px] px-[10px] bg-[#D881F8] w-[40px] h-[40px] flex items-center text-white text-[15px] font-bold rounded-[50%]"></button>
+                  <button onClick={() => setLocalColor('#F87070')} className="py-[13px] px-[10px] bg-[#F87070] w-[40px] h-[40px] flex items-center justify-center text-white text-[15px] font-bold rounded-[50%]"><Image className={`${localColor === '#F87070' ? 'block' : 'hidden'}`} src="/correct.svg" alt="Cor escolhida" width={15} height={11} /></button>
+                  <button onClick={() => setLocalColor('#70F3F8')} className="py-[13px] px-[10px] bg-[#70F3F8] w-[40px] h-[40px] flex items-center justify-center text-white text-[15px] font-bold rounded-[50%]"><Image className={`${localColor === '#70F3F8' ? 'block' : 'hidden'}`} src="/correct.svg" alt="Cor escolhida" width={15} height={11} /></button>
+                  <button onClick={() => setLocalColor('#D881F8')} className="py-[13px] px-[10px] bg-[#D881F8] w-[40px] h-[40px] flex items-center justify-center text-white text-[15px] font-bold rounded-[50%]"><Image className={`${localColor === '#D881F8' ? 'block' : 'hidden'}`} src="/correct.svg" alt="Cor escolhida" width={15} height={11} /></button>
                 </div>
               </div>
             </div>
           </div>
           {/* Button */}
-          <button className="pt-[21px] pb-[16px] px-[47px] bg-[#F87070] rounded-[26.5px] text-[16px] text-white font-bold absolute w-max translate-x-1/2 right-1/2 -bottom-[26px]" onClick={applyFilter}>Apply</button>
+          <button className={`
+            ${color === '#F87070' ? 'bg-[#F87070]'
+             :color === '#70F3F8' ? 'bg-[#70F3F8]'
+             :color === '#D881F8' ? 'bg-[#D881F8]'
+             : 'bg-[#F87070]'
+            }
+            pt-[21px] pb-[16px] px-[47px] rounded-[26.5px] text-[16px] text-white font-bold absolute w-max translate-x-1/2 right-1/2 -bottom-[26px]`} onClick={applyFilter}>Apply</button>
         </div>
       </div>
     </div>

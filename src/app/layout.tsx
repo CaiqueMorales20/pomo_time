@@ -1,10 +1,6 @@
 // Imports
 import type { Metadata } from 'next'
 
-// Fonts
-import { Kumbh_Sans } from 'next/font/google'
-const kumbh_sans = Kumbh_Sans({ subsets: ['latin'] })
-
 // Style
 import './globals.css'
 import AppContextComponent from './context'
@@ -24,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <AppContextComponent>
-        <body className={kumbh_sans.className}>{children}</body>
+        <body >{children}</body>
       </AppContextComponent>
     </html>
   )

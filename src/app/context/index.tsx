@@ -16,7 +16,7 @@ type AppContextComponentType ={
 export default function AppContextComponent({children}: AppContextComponentType) {
   // Variables
   const [status, setStatus] = useState<StatusType>('pomodoro')
-  const [color, setColor] = useState<ColorType>('pink')
+  const [color, setColor] = useState<ColorType>('#70F3F8')
   const [fontFamily, setFontFamily] = useState<FontType>('kumbh')
   const [running, setRunning] = useState(false)
   const [pomodoroTime, setPomodoroTime] = useState(25)

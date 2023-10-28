@@ -1,7 +1,7 @@
 // Types
 type StatusType = 'pomodoro' | 'short break' | 'long break' 
-type ColorType = 'pink' | 'blue' | 'lilac'
-type FontType = 'kumbh' | 'Roboto' | 'Space'
+type ColorType = '#F87070' | '#70F3F8' | '#D881F8'
+type FontType = 'Kumbh' | 'Roboto' | 'Space'
 type RunningType = true | false
 
 type ContextType = {
