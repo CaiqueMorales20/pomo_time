@@ -2,16 +2,23 @@
 'use client'
 
 // Imports
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useOnClickOutside } from "@/app/utils/useOnClickOutside";
 
 // Imported Components
 import Image from "next/image";
 
+// Context
+import { AppContext } from "@/app/context";
+
 // Functional Component
 export default function Settings() {
   // Variables
+  const {setPomodoroTime, setShortBreakTime, setLongBreakTime} = useContext(AppContext) as ContextType
   const [modalOpened, setModalOpened] = useState(false)
+  const [localPomodoroTime, setLocalPomodoroTime] = useState<number>()
+  const [localShortBreakTime, setLocalShortBreakTime] = useState<number>();
+  const [localLongBreakTime, setLocalLongBreakTime] = useState<number>();
   const modalRef = useRef(null)
 
   // Functions
@@ -24,7 +31,21 @@ export default function Settings() {
     setModalOpened(false)
   }
 
+  const handleTime = (e: React.FormEvent<HTMLInputElement>, setTime: (value: number) => void) => {
+    const newValue: string = e.currentTarget.value.toString()
+    if (newValue.length > 2) return
+    const parsedValue: number = parseInt(newValue.replace(/\D/g, ''))
+    if (parsedValue > 60) return setTime(60)
+    setTime(parsedValue)
+  }
+
   function applyFilter() {
+    setPomodoroTime(localPomodoroTime)
+    setShortBreakTime(localShortBreakTime)
+    setLongBreakTime(localLongBreakTime)
+    setLocalPomodoroTime(0)
+    setLocalShortBreakTime(0)
+    setLocalLongBreakTime(0)
     setModalOpened(false)
   }
 
@@ -54,15 +75,15 @@ export default function Settings() {
               <div className="grid grid-cols-3 gap-[20px]">
                 <div className="flex flex-col gap-[8px]">
                     <label className="text-[12px] text-dark opacity-40 font-bold">pomodoro</label>
-                    <input className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2} min={0} max={60} />
+                    <input value={localPomodoroTime} onChange={(e) => handleTime(e, setLocalPomodoroTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
                 </div>
                 <div className="flex flex-col gap-[8px]">
                     <label className="text-[12px] text-dark opacity-40 font-bold">short break</label>
-                    <input className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2} min={0} max={60} />
+                    <input value={localShortBreakTime} onChange={(e) => handleTime(e, setLocalShortBreakTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
                 </div>
                 <div className="flex flex-col gap-[8px]">
                     <label className="text-[12px] text-dark opacity-40 font-bold">long break</label>
-                    <input className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2} min={0} max={60} />
+                    <input value={localLongBreakTime} onChange={(e) => handleTime(e, setLocalLongBreakTime)} className="input-number outline-none bg-[#EFF1FA] text-[14px] text-dark font-bold h-[48px] py-[16px] px-[20px] rounded-[10px]" type="number" name="pomodoro" id="pomodoro" placeholder="0" maxLength={2}  max={60} />
                 </div>
               </div>
               {/* Wrapper */}
