@@ -16,7 +16,7 @@ export default function Switch() {
   return (
     <div className="bg-[#161932] mt-[55px] p-[7px] flex gap-2 rounded-[31.7px]">
       <button 
-        className={` text-[14px] font-bold pt-[19px] pb-[15px] px-[26px]  rounded-[26.5px] duration-300
+        className={` text-[12px] md:text-[14px] font-bold pt-[19px] pb-[15px] px-[26px]  rounded-[26.5px] duration-300
         ${status === 'pomodoro' ? 
          color === '#F87070' ? 'bg-[#F87070]'
         :color === '#70F3F8' ? 'bg-[#70F3F8]'
@@ -27,7 +27,7 @@ export default function Switch() {
         pomodoro
       </button>
       <button 
-        className={` text-[14px] font-bold pt-[19px] pb-[15px] px-[26px]  rounded-[26.5px] duration-300
+        className={` text-[12px] md:text-[14px] font-bold pt-[19px] pb-[15px] px-[26px]  rounded-[26.5px] duration-300
         ${status === 'short break' ? 
          color === '#F87070' ? 'bg-[#F87070]'
         :color === '#70F3F8' ? 'bg-[#70F3F8]'
@@ -38,7 +38,7 @@ export default function Switch() {
         short break
       </button>
       <button 
-        className={` text-[14px] font-bold pt-[19px] pb-[15px] px-[26px]  rounded-[26.5px] duration-300
+        className={` text-[12px] md:text-[14px] font-bold pt-[19px] pb-[15px] px-[26px]  rounded-[26.5px] duration-300
         ${status === 'long break' ? 
          color === '#F87070' ? 'bg-[#F87070]'
         :color === '#70F3F8' ? 'bg-[#70F3F8]'

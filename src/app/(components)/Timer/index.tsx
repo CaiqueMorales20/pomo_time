@@ -3,9 +3,12 @@
 
 // Imports
 import { useContext, useEffect, useState } from "react";
+import useSound from 'use-sound';
 
 // Imported Components
 import Circle from "react-circle";
+
+// Audio
 
 // Context
 import { AppContext } from "@/app/context";
@@ -21,6 +24,7 @@ export default function Timer() {
   const totalSeconds = currentTime * 60;
   const remainingSeconds = minutes * 60 + seconds;
   const progress = ((totalSeconds - remainingSeconds) / totalSeconds) * 100;
+  const [play, {stop}] = useSound('/alarm.mp3')
 
   // Functions
   useEffect(() => {
@@ -30,17 +34,16 @@ export default function Timer() {
   function decrease() {
     // Finished Timer
     if (minutes === 0 && seconds === 0) {
-      if (status === 'pomodoro') setStatus('short break');
+      // play()
+      if (status === 'pomodoro') {
+        breakSequence === 3 ? setStatus('long break') : setStatus('short break');
+      }
       if (status === 'long break') {
         setStatus('pomodoro')
         setBreakSequence(0)
       }
       if (status === 'short break') {
-        if(breakSequence === 3) {
-          setStatus('long break')
-        } else {
-          setStatus('pomodoro')
-        }
+        setStatus('pomodoro')
         setBreakSequence(prev => prev + 1)
       }
       setRunning(false)
@@ -57,9 +60,10 @@ export default function Timer() {
   }
 
   useEffect(() => {
+    stop()
     setSeconds(0)
     setRunning(false)
-  }, [status]);
+  }, [status, stop]);
 
   useEffect(() => {
     if(running) {
@@ -72,9 +76,9 @@ export default function Timer() {
 
   // Rendering
   return (
-    <section className="mt-[45px] mb-[63px] bg-bg-timer timer-shadow rounded-[50%] w-[500px] h-[500px] flex items-center justify-center relative">
+    <section className="mt-[45px] mb-[63px] bg-bg-timer timer-shadow rounded-[50%] w-[350px] md:w-[500px] h-[350px] md:h-[500px] flex items-center justify-center relative">
       <div className="mx-auto flex flex-col gap-[19px] items-center justify-center rounded-[50%] h-[80%] w-[80%] absolute z-20">
-        <h2 className="text-[100px] font-bold text-center text-[#D7E0FF]">{minutes.toString().length === 1 ? `0${minutes}` : minutes}:{seconds.toString().length === 1 ? `0${seconds}` : seconds}</h2>
+        <h2 className="text-[80px] md:text-[100px] traking-[-4px] md:tracking-normal font-bold text-center text-[#D7E0FF]">{minutes.toString().length === 1 ? `0${minutes}` : minutes}:{seconds.toString().length === 1 ? `0${seconds}` : seconds}</h2>
         <button className={`
           ${color === '#F87070' ? 'hover:text-[#F87070]'
           :color === '#70F3F8' ? 'hover:text-[#70F3F8]'
@@ -87,7 +91,7 @@ export default function Timer() {
         <Circle
           progress={progress}
           size={'100%'}
-          lineWidth={'11'}
+          lineWidth={running ? '11' : '0'}
           showPercentage={false}
           progressColor={color}
           bgColor="#181B34"
