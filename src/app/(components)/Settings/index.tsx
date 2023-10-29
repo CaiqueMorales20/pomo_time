@@ -10,7 +10,7 @@ import Image from "next/image";
 
 // Context
 import { AppContext } from "@/app/context";
-import { kumbh_sans, roboto_slab, space_mono } from "@/app/page";
+import { kumbh_sans, roboto_slab, space_mono } from "../Content";
 
 // Functional Component
 export default function Settings() {
