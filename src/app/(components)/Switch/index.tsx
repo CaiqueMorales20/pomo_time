@@ -14,7 +14,7 @@ export default function Switch() {
 
   // Rendering
   return (
-    <div className="bg-[#161932] mt-[55px] p-[7px] flex gap-2 rounded-[31.7px]">
+    <div className="bg-[#161932] mt-[32px] md:mt-[55px] p-[7px] flex gap-2 rounded-[31.7px]">
       <button 
         className={` text-[12px] md:text-[14px] font-bold pt-[19px] pb-[15px] px-[26px]  rounded-[26.5px] duration-300
         ${status === 'pomodoro' ? 
