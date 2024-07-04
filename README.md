@@ -1,36 +1,18 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pomo Time
+Our Pomodoro application is a powerful tool designed to boost productivity and enhance focus. With an intuitive and customizable interface, it offers an optimized experience for managing your time and daily tasks.
 
-## Getting Started
+## Key Features:
+### 1. Pomodoro Sequence:
+- Classic Pomodoro cycle: 25 minutes of focused work followed by a 5-minute short break. After   three Pomodoro cycles, a long break of 15 minutes is provided.
 
-First, run the development server:
+### 2. Customizable Timer:
+- Adjust the times for Pomodoro cycles, short breaks, and long breaks according to your needs.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### 3. Appearance Customization:
+- Colors: Change the application's colors to keep the interface pleasant and suited to your preferences.
+- Fonts: Choose from various font options to improve readability and make the application more enjoyable to use.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 4. Customizable Breaks:
+- Set the duration of short and long breaks, tailoring them to your work rhythm and personal preferences.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+With this application, you can easily monitor your productivity cycles, staying focused and efficient throughout the day. The customization flexibility allows you to adjust the tool to perfectly align with your needs and personal preferences.
